@@ -15,8 +15,7 @@ import frc.robot.Robot;
  * An example command.  You can replace me with your own command.
  */
 
-public class setpowerlong extends Command
-{
+public class setpowerlong extends Command {
     public setpowerlong() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.minibotsubsys);

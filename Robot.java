@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import frc.lib.Drivers.*;
+import frc.lib.drivers.Limelight;
 import frc.robot.commands.*;
 import frc.robot.commands.minibotsautos.*;
 import frc.robot.subsystems.*;
@@ -35,7 +35,7 @@ public class Robot extends TimedRobot
     public static ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
     public static minibotsubsystem minibotsubsys = new minibotsubsystem();
 
-    public static Limelight limelight = new Limelight();
+    public static Limelight limelight;
     public static OI oi;
     
     private Command autonomousCommand;
@@ -47,12 +47,15 @@ public class Robot extends TimedRobot
      * used for any initialization code.
      */
     @Override
-    public void robotInit()
-    {
+    public void robotInit() {
         oi = new OI();
         chooser.setDefaultOption("minibotauto(default)", new minibotauto());
         // chooser.addOption("My Auto", new MyAutoCommand());
         SmartDashboard.putData("Auto mode", chooser);
+        limelight = new Limelight();
+        //limelight.setPipeline(0);// sets second usb webcam to be side by side on display to the og display
+        //above disabled bc we have no second webcam
+
         scheduler = Scheduler.getInstance();
     }
   
@@ -65,8 +68,7 @@ public class Robot extends TimedRobot
      * LiveWindow and SmartDashboard integrated updating.
      */
     @Override
-    public void robotPeriodic()
-    {
+    public void robotPeriodic() {
         
     }
     
@@ -76,14 +78,12 @@ public class Robot extends TimedRobot
      * the robot is disabled.
      */
     @Override
-    public void disabledInit()
-    {
+    public void disabledInit() {
         
     }
     
     @Override
-    public void disabledPeriodic()
-    {
+    public void disabledPeriodic() {
         scheduler.getInstance().run();
     }
     
@@ -99,11 +99,11 @@ public class Robot extends TimedRobot
      * to the switch structure below with additional strings & commands.
      */
     @Override
-    public void autonomousInit()
-    {
-
-
+    public void autonomousInit() {
+        //limelight.setPipeline(0);// sets second usb webcam to be side by side on display to the og display
+        //above disabled bc we have no second webcam
         scheduler.add(new minibotauto());
+
     
         // schedule the autonomous command (example)
     }
@@ -112,9 +112,12 @@ public class Robot extends TimedRobot
      * This method is called periodically during autonomous.
      */
     @Override
-    public void autonomousPeriodic()
-    {
-
+    public void autonomousPeriodic() {
+        /*
+        System.out.println("attempted to get has target"+limelight.hasTarget());
+        System.out.println("tx"+limelight.getXOffset());
+        System.out.println("ty"+limelight.getYOffset());
+        */
         scheduler.getInstance().run();
     }
   

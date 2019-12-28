@@ -14,9 +14,8 @@ import frc.robot.Robot;
 /**
  * An example command.  You can replace me with your own command.
  */
-public class readpigeon extends Command {
-
-    public readpigeon() {
+public class longmotorencoderread extends Command {
+    public longmotorencoderread() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.minibotsubsys);
     }
@@ -24,13 +23,13 @@ public class readpigeon extends Command {
     // Called just before this Command runs the first time
     @Override
     protected void initialize() {
-        
+        Robot.minibotsubsys.setlongmotorbrakemode(0);
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     protected void execute() {
-        Robot.minibotsubsys.printpidgeonvalues(1);
+        Robot.minibotsubsys.longmotorencoder();
     }
 
     // Make this return true when this Command no longer needs to run execute()

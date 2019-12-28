@@ -15,16 +15,16 @@ import frc.robot.Robot;
 /**
  * An example command.  You can replace me with your own command.
  */
+
 public class minibotauto extends CommandGroup {
 
     //String the commands for your test auto here
     public minibotauto() {
-        addSequential(new readpigeon());
+        addSequential(new movetolong());
     }
 
     @Override
     protected void initialize() {
-
 
 
     }
